@@ -28,7 +28,6 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 */
 package labtainers.mainui;
-//okay
 import java.awt.Component;
 import java.awt.Dimension;
 import java.io.BufferedReader;
@@ -738,7 +737,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(addNetworkButton))
                 .addGap(5, 5, 5)
-                .addComponent(NetworkScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                .addComponent(NetworkScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
 
@@ -821,6 +820,7 @@ public class MainWindow extends javax.swing.JFrame {
         FileMenuBar.setText("File");
         FileMenuBar.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
 
+        NewLabMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         NewLabMenuItem.setText("New Lab");
         NewLabMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
