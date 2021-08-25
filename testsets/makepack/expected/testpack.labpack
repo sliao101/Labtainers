@@ -1,0 +1,1 @@
+{"labs":[{"notes":"this is one of them\n","name":"sshlab"},{"notes":"","name":"ssh-agent"},{"notes":"","name":"ldap"},{"notes":"","name":"radius"},{"notes":"this is almost the last lab\n","name":"users"},{"notes":"","name":"denyhost"}],"name":"testpack","description":"this is a test description\n","order":101}
