@@ -272,6 +272,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         ContainerAddDialogNameTextfield.setMinimumSize(new java.awt.Dimension(300, 20));
         ContainerAddDialogNameTextfield.setPreferredSize(new java.awt.Dimension(300, 20));
+        ContainerAddDialogNameTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContainerAddDialogNameTextfieldActionPerformed(evt);
+            }
+        });
 
         ContainerAddDialogCreateButton.setText("Create");
         ContainerAddDialogCreateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1498,6 +1503,10 @@ public class MainWindow extends javax.swing.JFrame {
         dialog.setVisible(true);
         dialog.dispose();
     }//GEN-LAST:event_configMenuItemActionPerformed
+
+    private void ContainerAddDialogNameTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContainerAddDialogNameTextfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ContainerAddDialogNameTextfieldActionPerformed
 
     
     //BUTTON FUNCTIONS//
