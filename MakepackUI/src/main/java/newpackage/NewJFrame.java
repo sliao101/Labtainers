@@ -126,12 +126,12 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                     String line1 = Freader.nextLine().trim();
                     
                     String line2 = Treader.nextLine().trim();
-                    System.out.println(line1);
-                    System.out.println(line2);
+                    //System.out.println(line1);
+                    //System.out.println(line2);
                     
                     if(!line1.equals(line2)){
                         value = true;
-                        System.out.println("I found a difference");
+                        //System.out.println("I found a difference");
                         break;
                     }
                 }
