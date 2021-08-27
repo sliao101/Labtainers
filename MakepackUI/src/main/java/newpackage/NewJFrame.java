@@ -387,7 +387,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream inputStream = classloader.getResourceAsStream(resource);
         if(inputStream == null){
-            inputStream = classloader.getResourceAsStream("makepackUI/src/main/resources/"+resource);
+            inputStream = classloader.getResourceAsStream("src/main/resources/"+resource);
             if(inputStream == null){
                 System.out.println("Could not find resource "+resource);
             }
