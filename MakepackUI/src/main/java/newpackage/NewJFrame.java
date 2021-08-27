@@ -151,16 +151,10 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         
         labsadded.clear();
         labnotes.clear();
+        
         try {
-          // What to do with the file, e.g. display it in a TextArea
           
-          java.util.Scanner input = new java.util.Scanner(file);
-
-          while (input.hasNextLine())
-          {
-            System.out.println(input.nextLine());
-          }       
-          //textarea.read( new java.io.FileReader( file.getAbsolutePath() ), null );
+          
           JSONParser jsonparser = new JSONParser();
           FileReader Reader = new FileReader(file.getAbsolutePath());
           Object obj = jsonparser.parse(Reader);
@@ -190,7 +184,8 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
           
           
         }catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.print(file +" is not found");
+            //e.printStackTrace();
         } catch (IOException ex) {
           //System.out.println("problem accessing file"+file.getAbsolutePath());
         }
@@ -229,7 +224,8 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
       } catch (IOException e) {
          e.printStackTrace();
       }
-        System.out.println("JSON file created: "+Objects);
+        //debug for creating json objects
+        //System.out.println("JSON file created: "+Objects);
     }   
     
     //Right as we close out of the frame, a method will be called to check if something changed or a new labpack was created.
@@ -293,7 +289,9 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         keywords.setModel(keys);
         
         String labdir = System.getenv("LABTAINER_DIR");
-        
+        //for fileChooser to start with current directory according to $LABTAINER_DIR
+        java.io.File labpackDir = new java.io.File("$LABTAINER_DIR/labpacks");
+        fileChooser.setCurrentDirectory(labpackDir);
         
         String labpath = labdir + java.io.File.separator + "labs";
         
@@ -323,7 +321,8 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                     }
                 }
             }catch (java.io.FileNotFoundException e) {
-                System.out.println("keywords.txt missing: " + path2);
+                //debug for labs with no keywords
+                //System.out.println("keywords.txt missing: " + path2);
                 //e.printStackTrace();
             }
             
@@ -1082,8 +1081,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     private void FindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindButtonActionPerformed
         //find a display labs with keywords that are selected.
         java.util.List<String> selectedlist = keywords.getSelectedValuesList();
-        
-        System.out.println("find keyword:"+selectedlist);
+
         lab.clear();
         
         for(int i=0; i<filelist.size(); i++) {
@@ -1097,7 +1095,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                     keywordslist.add(line);
                     
                 }
-            System.out.println(keywordslist);
+            
             if (keywordslist.containsAll(selectedlist)){
                 String labname = filelist.get(i).getParentFile().getParentFile().getName();
                         //the keywords.txt parent is config, and config's parent is the name of the lab
@@ -1110,7 +1108,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
 
         }
         sorting(lablist);    
-        System.out.println(lab);    
+           
            
         
         lablist.setModel(lab);
@@ -1127,7 +1125,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
 //This is for whenever you change the selection for the lablist model, the lab's description appears
     private void lablistValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lablistValueChanged
         String word = lablist.getSelectedValue();
-        System.out.println("value change to: "+ word);
+        //this is a debug: System.out.println("value change to: "+ word);
         String labdir = System.getenv("LABTAINER_DIR");
         String path = labdir + java.io.File.separator + "labs" + java.io.File.separator + word +java.io.File.separator+ "config" + java.io.File.separator + "about.txt";
         java.io.File aboutpath = new java.io.File(path);
@@ -1192,7 +1190,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         //jTextArea1.setText(labpack.get("description"));
         saving("/tmp");
         savepackname(labpack.get("name")+".labpack");
-        System.out.println(labpack.get("name"));
+        //System.out.println(labpack.get("name"));
 
     }//GEN-LAST:event_CreateActionPerformed
 
