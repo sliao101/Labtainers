@@ -256,6 +256,8 @@ public class MainWindow extends javax.swing.JFrame {
         ViewMenu = new javax.swing.JMenu();
         labtainerLogMenuItem = new javax.swing.JMenuItem();
         buildMenuItem = new javax.swing.JMenuItem();
+        IncreaseFontSize = new javax.swing.JMenuItem();
+        DecreaseFontSize = new javax.swing.JMenuItem();
 
         ContainerAddDialog.setTitle("Adding New Container");
         ContainerAddDialog.setMinimumSize(new java.awt.Dimension(433, 220));
@@ -741,7 +743,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(addNetworkButton))
                 .addGap(5, 5, 5)
-                .addComponent(NetworkScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .addComponent(NetworkScrollPane)
                 .addGap(10, 10, 10))
         );
 
@@ -1054,6 +1056,24 @@ public class MainWindow extends javax.swing.JFrame {
         });
         ViewMenu.add(buildMenuItem);
 
+        IncreaseFontSize.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_EQUALS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        IncreaseFontSize.setText("Increase Font SIze");
+        IncreaseFontSize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IncreaseFontSizeActionPerformed(evt);
+            }
+        });
+        ViewMenu.add(IncreaseFontSize);
+
+        DecreaseFontSize.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_MINUS, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        DecreaseFontSize.setText("Decrease Font Size");
+        DecreaseFontSize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DecreaseFontSizeActionPerformed(evt);
+            }
+        });
+        ViewMenu.add(DecreaseFontSize);
+
         MainMenuBar.add(ViewMenu);
 
         setJMenuBar(MainMenuBar);
@@ -1066,23 +1086,19 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ContainerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ContainerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(NetworkPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(NetworkPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)
                         .addGap(4, 4, 4)))
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(IndividualizePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(IndividualizePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1093,16 +1109,17 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(NetworkPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-                            .addComponent(ContainerPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE))
+                            .addComponent(NetworkPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                            .addComponent(ContainerPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(AssessmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(IndividualizePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(logo)))
+                        .addComponent(logo)
+                        .addGap(329, 329, 329)))
                 .addContainerGap())
         );
 
@@ -1507,6 +1524,14 @@ public class MainWindow extends javax.swing.JFrame {
     private void ContainerAddDialogNameTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContainerAddDialogNameTextfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ContainerAddDialogNameTextfieldActionPerformed
+
+    private void IncreaseFontSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncreaseFontSizeActionPerformed
+        OutputTextArea.setFont(new java.awt.Font("Ubuntu",java.awt.Font.PLAIN,24));
+    }//GEN-LAST:event_IncreaseFontSizeActionPerformed
+
+    private void DecreaseFontSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecreaseFontSizeActionPerformed
+        OutputTextArea.setFont(new java.awt.Font("Ubuntu",java.awt.Font.PLAIN,16));
+    }//GEN-LAST:event_DecreaseFontSizeActionPerformed
 
     
     //BUTTON FUNCTIONS//
@@ -2346,6 +2371,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel ContainerPanePanel;
     private javax.swing.JPanel ContainerPanel;
     private javax.swing.JScrollPane ContainerScrollPane;
+    private javax.swing.JMenuItem DecreaseFontSize;
     private javax.swing.JMenuItem DesignerMenuItem;
     private javax.swing.JMenu EditMenu;
     private javax.swing.JMenuItem ExitMenuItem;
@@ -2354,6 +2380,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel GraderRunning;
     private javax.swing.JPanel Header;
     private javax.swing.JMenu HelpMenu;
+    private javax.swing.JMenuItem IncreaseFontSize;
     private javax.swing.JPanel IndividualizePanel;
     private javax.swing.JMenuItem InstructorMenuItem;
     private javax.swing.JMenuItem LabDocumentsMenuItem;

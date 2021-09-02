@@ -10,6 +10,7 @@ package newpackage;
  * @author student
  */
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -144,6 +145,19 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         
     }
     
+     //this is for changing the color of the status button to see if changes were made
+    private void ChangeStatusButtonColor(){
+        java.io.File labpac = new java.io.File(labpack_path+java.io.File.separator+labpack.get("name")+".labpack");
+        if ((!labpac.exists() && labpack.containsKey("name")) ||SomethingChanged()){
+            SaveStatusButton.setForeground(Color.red);
+            
+        }
+        else if ((!labpac.exists() && labpack.containsKey("name")) ||SomethingChanged()==false){
+            SaveStatusButton.setForeground(Color.black);
+            
+        }
+       
+    }
   
 
     //DoesOPEN is a method called when we want to open a jsonFile labpack and display it in the UI
@@ -194,7 +208,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         }
     
         //System.out.println("File access cancelled by user.");
-        
+        ChangeStatusButtonColor();
     
     }
     
@@ -290,8 +304,9 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         
         String labdir = System.getenv("LABTAINER_DIR");
         //for fileChooser to start with current directory according to $LABTAINER_DIR
-        java.io.File labpackDir = new java.io.File("$LABTAINER_DIR/labpacks");
+        java.io.File labpackDir = new java.io.File(labdir + java.io.File.separator+ "labpacks");
         fileChooser.setCurrentDirectory(labpackDir);
+        System.out.println(labpackDir);
         
         String labpath = labdir + java.io.File.separator + "labs";
         
@@ -458,6 +473,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         ChangeFont = new javax.swing.JMenu();
         InreaseFont = new javax.swing.JMenuItem();
         DecreaseFont = new javax.swing.JMenuItem();
+        SaveStatusButton = new javax.swing.JMenu();
 
         fileChooser.setCurrentDirectory(new java.io.File("/home/student/labtainer/trunk/labpacks"));
         fileChooser.setFileFilter(new MyCustomFilter());
@@ -759,12 +775,12 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                             .addComponent(Move_Down_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(176, 176, 176)
                             .addComponent(RemoveButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE))
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(labsPane)
                             .addGap(30, 30, 30)))
-                    .addComponent(labnotePane, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                    .addComponent(labnotePane, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(AddNoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(23, 23, 23))
@@ -973,6 +989,10 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
 
             jMenuBar1.add(ViewButton);
 
+            SaveStatusButton.setText("*");
+            SaveStatusButton.setFont(new java.awt.Font("Lohit Tamil", 1, 12)); // NOI18N
+            jMenuBar1.add(SaveStatusButton);
+
             setJMenuBar(jMenuBar1);
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1019,7 +1039,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
            labsadded.removeElement(value.get(i));
            labnotes.remove(value.get(i));;
         }
-
+        ChangeStatusButtonColor();
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
     private void AddNoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNoteButtonActionPerformed
@@ -1028,6 +1048,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         
         labnotes.put(lab, description);//labnotes is a hashmap that maps labs to labnotes to be added or retreuve later 
         //this is for the save button next to labnotes to save notes to labs
+        ChangeStatusButtonColor();
     }//GEN-LAST:event_AddNoteButtonActionPerformed
 //move a lab in the labs in labpack model up in the order
     private void Move_Up_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Move_Up_ButtonActionPerformed
@@ -1040,6 +1061,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
             model.add(itemIndex - 1, selectedItem);// add the item to a new position in the list
             labs_in_labpack.setSelectedIndex(itemIndex - 1);// set selection to the new item
         } 
+        ChangeStatusButtonColor();
     }//GEN-LAST:event_Move_Up_ButtonActionPerformed
 //move a lab in the labs in labpack model down in the order
     private void Move_Down_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Move_Down_ButtonActionPerformed
@@ -1052,6 +1074,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
             model.add(itemIndex + 1, selectedItem);// add the item to a new position in the list
             labs_in_labpack.setSelectedIndex(itemIndex + 1);// set selection to the new item
         }
+        ChangeStatusButtonColor();
     }//GEN-LAST:event_Move_Down_ButtonActionPerformed
 
     private void OpenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenButtonActionPerformed
@@ -1075,7 +1098,8 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     }//GEN-LAST:event_NewButtonActionPerformed
 //saves
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
-        this.saving(labpack_path);//this save is for saving labpacks changes to the actual file
+        this.saving(labpack_path);//this save is for saving labpacks changes to the actual 
+        ChangeStatusButtonColor();//changes status button color to white since changes are saved
     }//GEN-LAST:event_SaveButtonActionPerformed
 
     private void FindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindButtonActionPerformed
@@ -1160,6 +1184,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                 labsadded.addElement(name);
                 labnotes.put(name, "");
             }
+            ChangeStatusButtonColor();//this will changes the color of the status button depending on changes
         }
     }//GEN-LAST:event_lablistMouseClicked
 //creating a new labpack from a dialog, it will take the name, description and order but will not be saved if you don't click save.
@@ -1168,8 +1193,9 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         labsadded.clear();
         labnotes.clear();
         String pack_name = TextName.getText();
+        if (pack_name.length() !=0){
         labpack.put("name", pack_name);
-
+        
         String des_name = TextDescription.getText();
         labpack.put("description", des_name);
         
@@ -1186,12 +1212,23 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         TextName.setText("");
         TextDescription.setText("");
         TextOrder.setText("");
-        //OrderField.setText(labpack.get("order"));
-        //jTextArea1.setText(labpack.get("description"));
-        saving("/tmp");
-        savepackname(labpack.get("name")+".labpack");
-        //System.out.println(labpack.get("name"));
 
+        saving("/tmp");
+        
+        savepackname(labpack.get("name")+".labpack");
+        }
+        else{
+            TextName.setText("");
+            TextDescription.setText("");
+            TextOrder.setText("");
+            labpack.clear();
+            labpackinfo.setVisible(false);
+            this.setTitle("makepack");
+            savepackname("empty");//this will just make sure that if you create a labpack with no name, and then leave, once you open the UI again it will show an empty labpack.
+        }
+        
+        //System.out.println(labpack.get("name"));
+        ChangeStatusButtonColor();
     }//GEN-LAST:event_CreateActionPerformed
 
     private void TextNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextNameKeyTyped
@@ -1230,7 +1267,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         String description = TextDescription1.getText();
         labpack.put("description", description);
         order_and_description.setVisible(false);
-        
+        ChangeStatusButtonColor();
     }//GEN-LAST:event_save_OandDActionPerformed
 //this prevents user from typing letter in the order textbox that requires digits
     private void TextOrder1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextOrder1KeyTyped
@@ -1382,8 +1419,10 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                     if(labsadded.contains(name)==false) {
                     labsadded.addElement(name);
                     labnotes.put(name, "");
-            }
+                    }
+                    ChangeStatusButtonColor();
                 }
+        
     }//GEN-LAST:event_lablistKeyPressed
 
     private void QuitBUttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitBUttonActionPerformed
@@ -1494,6 +1533,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     private javax.swing.JMenuItem QuitBUtton;
     private javax.swing.JButton RemoveButton;
     private javax.swing.JMenuItem SaveButton;
+    private javax.swing.JMenu SaveStatusButton;
     private javax.swing.JTextArea TextDescription;
     private javax.swing.JTextArea TextDescription1;
     private javax.swing.JTextField TextName;
@@ -1515,6 +1555,9 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
