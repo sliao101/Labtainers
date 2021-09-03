@@ -896,9 +896,6 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="SaveIcon">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/student/DanielsUI/Labtainers/MakepackUI/src/main/resources/saveButton.png"/>
-            </Property>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>

@@ -916,7 +916,6 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
 
             jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-            SaveIcon.setIcon(new javax.swing.ImageIcon("/home/student/DanielsUI/Labtainers/MakepackUI/src/main/resources/saveButton.png")); // NOI18N
             SaveIcon.setFocusable(false);
             SaveIcon.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1222,7 +1221,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         if (evt.getClickCount() == 2) {
             int index = list.locationToIndex(evt.getPoint());
             String name = lablist.getModel().getElementAt(index);
-            System.out.println("index: "+name);
+            //System.out.println("index: "+name);
             if(labsadded.contains(name)==false) {
                 labsadded.addElement(name);
                 labnotes.put(name, "");
@@ -1339,7 +1338,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     String labdir = System.getenv("LABTAINER_DIR");
     String instructor_path = labdir + java.io.File.separator + "scripts"+java.io.File.separator +"labtainer-instructor";
     String labpack_path = "bin" +java.io.File.separator +"makepack"; 
-    System.out.println(labpack_path);
+    //System.out.println(labpack_path);
     try{
         ProcessBuilder pb = new ProcessBuilder(labpack_path);
         pb.directory(new java.io.File(instructor_path));
@@ -1361,10 +1360,10 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
             }
         }
         String result = builder.toString();
-        System.out.println(result);
+        //System.out.println(result);//debug to see list of labpacks
         labpacktextbox.setText(result);
         } catch (IOException | InterruptedException ex) {
-          System.out.println(ex);
+          //System.out.println(ex);
         
         }
         
