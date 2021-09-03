@@ -96,7 +96,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
             
             }
         sorting(lablist);
-    }
+    }//for creating a packname.txt in tmp that will be read to see what lab was opened or created last
      private void savepackname(String packname){
         try{
             java.io.FileWriter writer = new java.io.FileWriter("/tmp/packname.txt");
@@ -200,7 +200,8 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
           
           
         }catch (FileNotFoundException e) {
-            System.out.print(file +" is not found");
+            //debug below that will catch and print when a labpack file is missing due to removal perhaps
+            System.out.println(file +" is not found");
             //e.printStackTrace();
         } catch (IOException ex) {
           //System.out.println("problem accessing file"+file.getAbsolutePath());
@@ -310,7 +311,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         //for fileChooser to start with current directory according to $LABTAINER_DIR
         java.io.File labpackDir = new java.io.File(labdir + java.io.File.separator+ "labpacks");
         fileChooser.setCurrentDirectory(labpackDir);
-        System.out.println(labpackDir);
+        
         
         String labpath = labdir + java.io.File.separator + "labs";
         
@@ -915,6 +916,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
 
             jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+            SaveIcon.setIcon(new javax.swing.ImageIcon("/home/student/DanielsUI/Labtainers/MakepackUI/src/main/resources/saveButton.png")); // NOI18N
             SaveIcon.setFocusable(false);
             SaveIcon.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
