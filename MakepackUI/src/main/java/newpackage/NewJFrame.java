@@ -149,11 +149,12 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     private void ChangeStatusButtonColor(){
         java.io.File labpac = new java.io.File(labpack_path+java.io.File.separator+labpack.get("name")+".labpack");
         if ((!labpac.exists() && labpack.containsKey("name")) ||SomethingChanged()){
-            SaveStatusButton.setForeground(Color.red);
+            jButton1.setBackground(Color.white);
+            
             
         }
         else if ((!labpac.exists() && labpack.containsKey("name")) ||SomethingChanged()==false){
-            SaveStatusButton.setForeground(Color.black);
+            jButton1.setBackground(Color.GRAY);
             
         }
        
@@ -206,9 +207,9 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         catch(ParseException e) {
             //e.printStackTrace();
         }
-    
-        //System.out.println("File access cancelled by user.");
         ChangeStatusButtonColor();
+        //System.out.println("File access cancelled by user.");
+        
     
     }
     
@@ -390,6 +391,17 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         } catch(IOException ex){
            System.out.println("IOException from set icon"); 
         }
+        
+        try{
+        InputStream inputStream = brokenJavaNaming("saveButton.png");
+        ImageIcon ButtonImg = new ImageIcon(ImageIO.read(inputStream));
+        
+        
+        jButton1.setIcon(ButtonImg);
+        } catch(IOException ex){
+           System.out.println("IOException from set icon"); 
+        }
+        
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         CloseWindow();
         
@@ -460,6 +472,8 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         keywords = new javax.swing.JList<>();
         FindButton = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         OpenButton = new javax.swing.JMenuItem();
@@ -473,7 +487,6 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         ChangeFont = new javax.swing.JMenu();
         InreaseFont = new javax.swing.JMenuItem();
         DecreaseFont = new javax.swing.JMenuItem();
-        SaveStatusButton = new javax.swing.JMenu();
 
         fileChooser.setCurrentDirectory(new java.io.File("/home/student/labtainer/trunk/labpacks"));
         fileChooser.setFileFilter(new MyCustomFilter());
@@ -775,12 +788,12 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                             .addComponent(Move_Down_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(176, 176, 176)
                             .addComponent(RemoveButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE))
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(labsPane)
                             .addGap(30, 30, 30)))
-                    .addComponent(labnotePane, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(labnotePane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(AddNoteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(23, 23, 23))
@@ -880,7 +893,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(LablistlPane)
+                        .addComponent(LablistlPane, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                         .addComponent(KeyPane))
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel5Layout.createSequentialGroup()
@@ -890,11 +903,36 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(ClearButton)))
                     .addGap(18, 18, 18)
-                    .addComponent(labdescriptionPane)
+                    .addComponent(labdescriptionPane, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                     .addGap(30, 30, 30))
             );
 
             logo.setText("jLabel17");
+
+            jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+            jButton1.setBackground(java.awt.Color.gray);
+            jButton1.setFocusable(false);
+            jButton1.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton1ActionPerformed(evt);
+                }
+            });
+
+            javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+            jPanel9.setLayout(jPanel9Layout);
+            jPanel9Layout.setHorizontalGroup(
+                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel9Layout.createSequentialGroup()
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE))
+            );
+            jPanel9Layout.setVerticalGroup(
+                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+            );
 
             jMenu1.setMnemonic('F');
             jMenu1.setText("File");
@@ -989,10 +1027,6 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
 
             jMenuBar1.add(ViewButton);
 
-            SaveStatusButton.setText("*");
-            SaveStatusButton.setFont(new java.awt.Font("Lohit Tamil", 1, 12)); // NOI18N
-            jMenuBar1.add(SaveStatusButton);
-
             setJMenuBar(jMenuBar1);
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1004,21 +1038,25 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(28, 28, 28)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(22, 22, 22))
+                    .addGap(32, 32, 32))
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(96, 96, 96))
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(102, 102, 102)
-                    .addComponent(logo)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(56, 56, 56)
+                            .addComponent(logo)
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addContainerGap())))
             );
 
             pack();
@@ -1461,6 +1499,13 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         }
     }//GEN-LAST:event_labpacktextboxKeyPressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jButton1.getBackground().equals(Color.white)){
+          saving(labpack_path);
+        }
+        ChangeStatusButtonColor();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1533,7 +1578,6 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     private javax.swing.JMenuItem QuitBUtton;
     private javax.swing.JButton RemoveButton;
     private javax.swing.JMenuItem SaveButton;
-    private javax.swing.JMenu SaveStatusButton;
     private javax.swing.JTextArea TextDescription;
     private javax.swing.JTextArea TextDescription1;
     private javax.swing.JTextField TextName;
@@ -1542,6 +1586,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     private javax.swing.JMenu ViewButton;
     private javax.swing.JTextPane description_box;
     private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1555,9 +1600,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
