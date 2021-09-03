@@ -145,16 +145,17 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         
     }
     
-     //this is for changing the color of the status button to see if changes were made
+     //this is for changing the color of the SaveIcon button to see if changes were made
+     //Gray means no changes have been made, White means changes have been made to labpack
     private void ChangeStatusButtonColor(){
         java.io.File labpac = new java.io.File(labpack_path+java.io.File.separator+labpack.get("name")+".labpack");
         if ((!labpac.exists() && labpack.containsKey("name")) ||SomethingChanged()){
-            jButton1.setBackground(Color.white);
+            SaveIcon.setBackground(Color.white);
             
             
         }
         else if ((!labpac.exists() && labpack.containsKey("name")) ||SomethingChanged()==false){
-            jButton1.setBackground(Color.GRAY);
+            SaveIcon.setBackground(Color.GRAY);
             
         }
        
@@ -233,9 +234,11 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         Objects.put("order",Long.parseLong(labpack.get("order")));
         }
         try {
+         if(labpack.containsKey("name")){
          FileWriter file = new FileWriter(path+java.io.File.separator+labpack.get("name")+".labpack");
          file.write(Objects.toJSONString());
          file.close();
+         }
       } catch (IOException e) {
          e.printStackTrace();
       }
@@ -361,7 +364,8 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
             }
             
         } catch(java.io.FileNotFoundException e) {
-            System.out.println("problem accessing file labname.txt");
+            //System.out.println("problem accessing file labname.txt"); --is printed when there is no packname.txt file yet that contains previous labpack name
+            SaveIcon.setBackground(Color.GRAY);
         }
             
         
@@ -397,7 +401,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         ImageIcon ButtonImg = new ImageIcon(ImageIO.read(inputStream));
         
         
-        jButton1.setIcon(ButtonImg);
+        SaveIcon.setIcon(ButtonImg);
         } catch(IOException ex){
            System.out.println("IOException from set icon"); 
         }
@@ -473,7 +477,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         FindButton = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        SaveIcon = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         OpenButton = new javax.swing.JMenuItem();
@@ -911,11 +915,10 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
 
             jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-            jButton1.setBackground(java.awt.Color.gray);
-            jButton1.setFocusable(false);
-            jButton1.addActionListener(new java.awt.event.ActionListener() {
+            SaveIcon.setFocusable(false);
+            SaveIcon.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton1ActionPerformed(evt);
+                    SaveIconActionPerformed(evt);
                 }
             });
 
@@ -924,14 +927,14 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
             jPanel9Layout.setHorizontalGroup(
                 jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel9Layout.createSequentialGroup()
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SaveIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE))
             );
             jPanel9Layout.setVerticalGroup(
                 jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SaveIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
             );
 
             jMenu1.setMnemonic('F');
@@ -1077,7 +1080,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
            labsadded.removeElement(value.get(i));
            labnotes.remove(value.get(i));;
         }
-        ChangeStatusButtonColor();
+        ChangeStatusButtonColor();//calls method for changing the SaveIcon button's color depending on Something_Changed
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
     private void AddNoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNoteButtonActionPerformed
@@ -1085,8 +1088,8 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         String description = notes_box.getText();
         
         labnotes.put(lab, description);//labnotes is a hashmap that maps labs to labnotes to be added or retreuve later 
-        //this is for the save button next to labnotes to save notes to labs
-        ChangeStatusButtonColor();
+        
+        ChangeStatusButtonColor();//calls method for changing the SaveIcon button's color depending on Something_Changed
     }//GEN-LAST:event_AddNoteButtonActionPerformed
 //move a lab in the labs in labpack model up in the order
     private void Move_Up_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Move_Up_ButtonActionPerformed
@@ -1137,7 +1140,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
 //saves
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         this.saving(labpack_path);//this save is for saving labpacks changes to the actual 
-        ChangeStatusButtonColor();//changes status button color to white since changes are saved
+        ChangeStatusButtonColor();//changes SaveIcon color to Gray since changes are saved
     }//GEN-LAST:event_SaveButtonActionPerformed
 
     private void FindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindButtonActionPerformed
@@ -1222,7 +1225,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
                 labsadded.addElement(name);
                 labnotes.put(name, "");
             }
-            ChangeStatusButtonColor();//this will changes the color of the status button depending on changes
+            ChangeStatusButtonColor();//this will changes the color of the SaveIcon button depending on changes
         }
     }//GEN-LAST:event_lablistMouseClicked
 //creating a new labpack from a dialog, it will take the name, description and order but will not be saved if you don't click save.
@@ -1266,7 +1269,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         }
         
         //System.out.println(labpack.get("name"));
-        ChangeStatusButtonColor();
+        ChangeStatusButtonColor();//calls method for changing the SaveIcon buttons color depending on Something_Changed
     }//GEN-LAST:event_CreateActionPerformed
 
     private void TextNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextNameKeyTyped
@@ -1499,12 +1502,12 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
         }
     }//GEN-LAST:event_labpacktextboxKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(jButton1.getBackground().equals(Color.white)){
+    private void SaveIconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveIconActionPerformed
+        if(SaveIcon.getBackground().equals(Color.white)){
           saving(labpack_path);
         }
-        ChangeStatusButtonColor();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ChangeStatusButtonColor();//now the SaveIcon button will turn grey after saving changes
+    }//GEN-LAST:event_SaveIconActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1578,6 +1581,7 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     private javax.swing.JMenuItem QuitBUtton;
     private javax.swing.JButton RemoveButton;
     private javax.swing.JMenuItem SaveButton;
+    private javax.swing.JButton SaveIcon;
     private javax.swing.JTextArea TextDescription;
     private javax.swing.JTextArea TextDescription1;
     private javax.swing.JTextField TextName;
@@ -1586,7 +1590,6 @@ private static java.util.HashMap<String, String> labnotes = new java.util.HashMa
     private javax.swing.JMenu ViewButton;
     private javax.swing.JTextPane description_box;
     private javax.swing.JFileChooser fileChooser;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
